@@ -1,14 +1,15 @@
 package ua.lviv.iot.algo.part1.lab1;
-import lombok.*;
 
+import lombok.*;
 
 @Getter
 @ToString
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 
 public class SchoolPen {
-    private String id;
+    private String id = "isn-101";
     private String brand;
     private String color;
     private String material;
@@ -16,36 +17,42 @@ public class SchoolPen {
     private int numPencils;
     private int numPens;
     private int numErasers;
-    public void addPencil(){
+
+    public void addPencil() {
         numPencils++;
     }
-    public void addPen(){
+
+    public void addPen() {
         numPens++;
     }
-    public void removePencil(){
-        numPencils--;
-    }
-    public void removePen(){
-        numPens--;
-    }
-    public static SchoolPen instance = new SchoolPen();
 
-    static SchoolPen getInstance(){
+    public void removePencil() {
+        if (numPencils > 1)
+            numPencils--;
+        else return;
+    }
+
+    public void removePen() {
+        if (numPens > 1)
+            numPens--;
+        else return;
+    }
+
+    public static ua.lviv.iot.algo.part1.lab1.SchoolPen instance = new ua.lviv.iot.algo.part1.lab1.SchoolPen();
+
+    static ua.lviv.iot.algo.part1.lab1.SchoolPen getInstance() {
         return instance;
     }
 
-    public SchoolPen(){
-        this.id="isn-101";
-    }
     public static void main(String[] args) {
-        SchoolPen backpack[] = new SchoolPen[3];
-        backpack[0] = new SchoolPen();
-        backpack[1] = new SchoolPen("239832-234234", "Toyota"
-                , "red", "leather", 23.1, 2, 3, 28);
-        backpack[2].getInstance();
-        for(int i=0; i<3; i++)
-        {
-            System.out.println(backpack[i]);
+        ua.lviv.iot.algo.part1.lab1.SchoolPen backpack[] = {
+                new ua.lviv.iot.algo.part1.lab1.SchoolPen(),
+                new ua.lviv.iot.algo.part1.lab1.SchoolPen("239832-234234", "Toyota"
+                        , "red", "leather", 23.1, 2, 3, 28),
+                getInstance(), getInstance()
+        };
+        for (ua.lviv.iot.algo.part1.lab1.SchoolPen pen : backpack) {
+            System.out.println(pen);
         }
     }
 }
